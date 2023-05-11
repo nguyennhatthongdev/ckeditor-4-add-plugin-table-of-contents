@@ -12,7 +12,24 @@ if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 )
 // unless user specified own height.
 CKEDITOR.config.height = 150;
 CKEDITOR.config.width = 'auto';
-CKEDITOR.config.extraPlugins = "contents"
+CKEDITOR.config.extraPlugins = [
+	"contents",
+	"base64image",
+	"find",
+	"font",
+	"justify",
+	"html5video",
+	"removeformat",
+	"image2",
+	"youtube",
+	"lineheight",
+	"colorinput",
+	"colorbutton",
+	"easyimage",
+	"balloontoolbar"
+]
+
+CKEDITOR.config.skin = 'office2013'
 
 var initSample = ( function() {
 	var wysiwygareaAvailable = isWysiwygareaAvailable(),
@@ -31,7 +48,14 @@ var initSample = ( function() {
 
 		// Depending on the wysiwygarea plugin availability initialize classic or inline editor.
 		if ( wysiwygareaAvailable ) {
-			CKEDITOR.replace( 'editor' );
+			CKEDITOR.replace( 'editor', {
+				filebrowserBrowseUrl : 'ckeditor/ckfinder/ckfinder.html',
+				filebrowserImageBrowseUrl : 'ckeditor/ckfinder/ckfinder.html?type=Images',
+				filebrowserFlashBrowseUrl : 'ckeditor/ckfinder/ckfinder.html?type=Flash',
+				filebrowserUploadUrl : 'ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+				filebrowserImageUploadUrl : 'ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+				filebrowserFlashUploadUrl : 'ckeditor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+			});
 		} else {
 			editorElement.setAttribute( 'contenteditable', 'true' );
 			CKEDITOR.inline( 'editor' );
